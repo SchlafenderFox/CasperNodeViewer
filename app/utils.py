@@ -15,7 +15,7 @@ def get_prometheus_info(name, url):
 
 def get_additional_info():
     try:
-        response = requests.get(url="https://127.0.0.1:8888/status")
+        response = requests.get(url="http://127.0.0.1:8888/status")
     except (Timeout, ConnectionError):
         logging.error("[Node info] Timeout connection")
         return None
