@@ -26,13 +26,6 @@ echo "[INFO] Starting node explorer..."
 docker-compose up -d --build
 echo "[INFO] Node explorer is up!"
 
-echo "[INFO] Setting firewall rules..."
-
-#firewall-cmd --permanent --zone=public --add-rich-rule='rule priority="-31000" family="ipv4" source address="0.0.0.0/0" port port="10100" protocol="tcp" accept'
-#echo "[INFO] Firewall rules set! Reloading firewall..."
-#firewall-cmd --reload
-#firewall-cmd --complete-reload
-
 IP=$(curl ifconfig.co)
 echo "[INFO] Firewall reloaded seccessful! Checking info on http://$IP:10100/metrics"
 echo "[INFO] You can change any settings in settings.env file."
