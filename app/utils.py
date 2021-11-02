@@ -1,4 +1,5 @@
 import logging
+from json import JSONDecodeError
 
 import requests
 from requests.exceptions import Timeout, ConnectionError
@@ -18,11 +19,17 @@ def get_address_information(node_public_key: str):
     staked_amount = "0"
 
     try:
-        bids = requests.post("https://node-clarity-testnet.make.services/rpc",
+        response = requests.post("https://node-clarity-testnet.make.services/rpc",
                              json={"jsonrpc": "2.0", "id": "0", "method": "state_get_auction_info",
-                                   "params": []}).json()[
-            'result']['auction_state']['bids']
+                                   "params": []})
     except (Timeout, ConnectionError):
+        return active, staked_amount
+
+    try:
+        bids = response.json()[
+            'result']['auction_state']['bids']
+    except JSONDecodeError:
+        print("ERROR PARSING:", response.text)
         return active, staked_amount
 
     for bid in bids:
