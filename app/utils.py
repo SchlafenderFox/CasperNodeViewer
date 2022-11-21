@@ -21,7 +21,7 @@ def get_address_information(node_public_key: str):
     try:
         response = requests.post("https://node-clarity-testnet.make.services/rpc",
                              json={"jsonrpc": "2.0", "id": "0", "method": "state_get_auction_info",
-                                   "params": []})
+                                   "params": []}, timeout=10)
     except (Timeout, ConnectionError):
         return active, staked_amount
 
