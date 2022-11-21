@@ -8,9 +8,6 @@ app = Flask(__name__)
 
 @app.route("/metrics")
 def home():
-    if request.remote_addr != MASTER_SERVER_IP:
-        return "Access denied! Wrong IP."
-
     info_set = list()
     targets = \
         {
