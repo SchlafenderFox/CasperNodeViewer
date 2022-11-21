@@ -5,9 +5,8 @@ services:
   node-exporter:
     image: prom/node-exporter
     container_name: node-exporter
+    network_mode: host
     restart: always
-    ports:
-      - 9100:9100
 
   viewer:
     build: .
